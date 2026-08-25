@@ -22,6 +22,18 @@ class Counter {
         this.set_focus_status(FocusStatus.Pomodoro)
     }
 
+    public reset(settings: Settings): void {
+        // Object.assign(this.settings, settings)
+        this.settings = settings
+        this.current_interval = 0
+        this.focus_status = FocusStatus.Pomodoro
+        this.running_status = RunningStatus.Paused
+        this.countdown_minutes = 0
+        this.countdown_seconds = 0
+        
+        this.set_focus_status(FocusStatus.Pomodoro)
+    }
+
     public countdown_once(): boolean {
         let is_finished = false
         this.countdown_seconds -= 1

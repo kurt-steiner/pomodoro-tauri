@@ -37,7 +37,7 @@ import Column from '@/components/flex/column.vue';
 import CardAdd from '@/components/taskcard/card-add.vue';
 
 import { usePomodoroStore } from '@/store';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { ITask } from '@/model/task';
 import Sizedbox from '@/components/sizedbox.vue';
 import { VueDraggable } from 'vue-draggable-plus';

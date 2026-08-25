@@ -4,12 +4,12 @@ import { computed, reactive, ref } from "vue";
 import { FocusStatus, RunningStatus } from "@/model/status";
 import type { ITask } from "@/model/task";
 import sound from '@/assets/notifaction.mp3'
-import Settings from "@/model/settings";
 import Database from '@tauri-apps/plugin-sql'
 import * as service from '@/service'
+import Settings from "./model/settings";
 
 export const usePomodoroStore = defineStore('pomodoro', () => {
-    let _settings = {
+    const settings = ref<Settings>({
         pomodoro_time: 25,
         shortbreak_time: 5,
         longbreak_time: 15,
@@ -17,16 +17,11 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
 
         playing_repeat_count: 1,
         playing_sound_volumes: 0.7
-    }
 
-    const settings = computed({
-        get: () => _settings,
-        set: (value: Settings) => {
-            _settings = value
-        }
     })
 
-    const counter = reactive(new Counter(settings.value))
+
+    const counter = ref(new Counter(settings.value))
 
     const tasks = ref<ITask[]>([])
     
@@ -36,14 +31,14 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
     const expanded_task_id = ref<number | null>(null)
 
     const focus_status = computed({
-        get: () => counter.focus_status,
+        get: () => counter.value.focus_status,
         set: (status: FocusStatus) => {
-            counter.set_focus_status(status)
+            counter.value.set_focus_status(status)
         }
     })
 
-    const time_text = computed(() => counter.time_text)
-    const running_status = computed(() => counter.running_status)
+    const time_text = computed(() => counter.value.time_text)
+    const running_status = computed(() => counter.value.running_status)
 
     let interval: number = -1
 
@@ -54,7 +49,7 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
 
         if (interval == -1) {
             interval = window.setInterval(() => {
-                if (counter.countdown_once()) {
+                if (counter.value.countdown_once()) {
                     pause_countdown()
                     play_audio()
                 }
@@ -68,11 +63,11 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
     }
 
     const toggle_running = () => {
-        if (counter.running_status == RunningStatus.Paused) {
-            counter.running_status = RunningStatus.Running
+        if (counter.value.running_status == RunningStatus.Paused) {
+            counter.value.running_status = RunningStatus.Running
             start_countdown()
         } else {
-            counter.running_status = RunningStatus.Paused
+            counter.value.running_status = RunningStatus.Paused
             pause_countdown()
         }
     }
@@ -120,6 +115,10 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
     })
 
     const load_database = async (): Promise<void> => {
+        if (_database != null) {
+            return;
+        }
+
         if (_database == null) {
             _database = await Database.load("sqlite:tasks.db")
         }
@@ -230,6 +229,11 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
     }
 
 
+    // 重置计时器
+    const reset_counter = () => {
+        counter.value.reset(settings.value)
+    }
+
     return {
         focus_status,
         time_text,
@@ -254,6 +258,8 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
         update_task,
         update_reorder,
         select_tasks,
-        delete_all_tasks
+        delete_all_tasks,
+
+        reset_counter
     }
 })
