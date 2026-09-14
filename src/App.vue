@@ -1,10 +1,24 @@
 <template>
-    <main>
-        <router-view/>
-    </main>
+    <router-view/>
 </template>
 
 <style lang="scss">
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Firefox */
+    scrollbar-width: none;
+    /* IE & Legacy Edge */
+    -ms-overflow-style: none;
+    /* 保持滚动功能 */
+    overflow: auto;
+    
+}
+
 main {
     font-family:
             "ArialRounded",
@@ -19,4 +33,5 @@ main {
             "Segoe UI Emoji",
             "Segoe UI Symbol";
 }
+
 </style>

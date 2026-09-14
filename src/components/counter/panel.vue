@@ -41,7 +41,7 @@ const toggle_button = () => {
     
     padding-top: 20px;
     padding-bottom: 30px;
-    margin-top: 40px;
+    margin-top: 20px;
     border-radius: 10px;
     
     div.time {
