@@ -1,4 +1,4 @@
-import {expect, test} from 'vitest'
+import {test} from 'vitest'
 import { move_up, move_down } from './utils'
 
 

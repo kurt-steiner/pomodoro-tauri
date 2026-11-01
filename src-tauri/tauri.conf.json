@@ -12,11 +12,13 @@
   "app": {
     "windows": [
       {
+        "decorations": false,
+        "transparent": false,
         "title": "pomodoro",
         "width": 500,
-        "height": 800,
+        "height": 1080,
         "resizable": false,
-        "fullscreen": false
+        "fullscreen": false 
       }
     ],
     "security": {

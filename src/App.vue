@@ -1,6 +1,12 @@
 <template>
+    <TitleBar/>
+    
     <router-view/>
 </template>
+
+<script lang="ts" setup>
+import TitleBar from '@/components/titlebar.vue'
+</script>
 
 <style lang="scss">
 

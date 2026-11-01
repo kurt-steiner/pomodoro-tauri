@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import Counter from "@/model/counter";
-import { computed, reactive, ref } from "vue";
+import { computed, ref } from "vue";
 import { FocusStatus, RunningStatus } from "@/model/status";
 import type { ITask } from "@/model/task";
 import sound from '@/assets/notifaction.mp3'

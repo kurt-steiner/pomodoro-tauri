@@ -35,7 +35,8 @@ const task_placeholder = ref<ITask>({
     is_done: false,
     expect_pomodoro_count: 1,
     actual_pomodoro_count: 0,
-    note: null
+    note: null,
+    next_id: null
 })
 
 const handle_toggle = () => {
@@ -50,7 +51,8 @@ const handle_cancel = () => {
         is_done: false,
         expect_pomodoro_count: 1,
         actual_pomodoro_count: 0,
-        note: null
+        note: null,
+        next_id: null
     }
 }
 
