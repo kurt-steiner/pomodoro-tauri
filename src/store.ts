@@ -153,7 +153,11 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
 
         // 更新 上一个task 的 next_id
         if (index == tasks.value.length - 1) {
-            tasks.value[index - 1].next_id = null
+            if (tasks.value.length > 1) {
+                tasks.value[index - 1].next_id = null
+            } else {
+                // 此时，只有一个元素，不需要再设置
+            }
         } else if (index != 0) {
             tasks.value[index - 1].next_id = tasks.value[index + 1].id
         }
@@ -234,6 +238,26 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
         counter.value.reset(settings.value)
     }
 
+
+    const clean_act_pomodoro = async (): Promise<void> => {
+        tasks.value.forEach(task => task.actual_pomodoro_count = 0)
+        await Promise.all(tasks.value.map(task => update_task(task)));
+    }
+
+    const clear_all_tasks = async (): Promise<void> => {
+        tasks.value = []
+        await delete_all_tasks()
+    }
+
+    const clear_finished_tasks = async (): Promise<void> => {
+        await Promise.all(
+            tasks.value
+                .filter(task => task.is_done)
+                .map(task => delete_task(task)))
+
+        tasks.value = await select_tasks();
+    }
+
     return {
         focus_status,
         time_text,
@@ -260,6 +284,10 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
         select_tasks,
         delete_all_tasks,
 
-        reset_counter
+        reset_counter,
+
+        clear_all_tasks,
+        clear_finished_tasks,
+        clean_act_pomodoro
     }
 })

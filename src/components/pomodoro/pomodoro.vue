@@ -3,17 +3,22 @@
         <Panel/>
 
         <h3 class="title">{{ title }}</h3>
-        <hr/>
+        <Row class="dropdown-wrapper" main-axis-size="max" main-axis-alignment="end">
+            <!-- dropdown -->
+            <Dropdown @clean-act-pomodoro="clean_act_pomodoro"
+                      @clear-all-tasks="clear_all_tasks"
+                      @clear-finished-tasks="clear_finished_tasks"/>
+        </Row>
 
-        <!-- <TaskCardExpand :task="state.tasks[0]"/> -->
+        <hr/>
         <Sizedbox height="10px"/>
         <div class="tasks">
-            <VueDraggable handle=".handle" v-model="state.tasks" @update="handle_reorder">
-                <template v-for="task in state.tasks" :key="task.id">
+            <VueDraggable handle=".handle" v-model="store.tasks" @update="handle_reorder">
+                <template v-for="task in store.tasks" :key="task.id">
                     <div class="task-item">
                         <TaskCard :task="task"
-                                :selected="task.id == state.selected_task_id"
-                                :expanded="task.id == state.expanded_task_id"
+                                :selected="task.id == store.selected_task_id"
+                                :expanded="task.id == store.expanded_task_id"
                                 @select="handle_select(task)"
                                 @expand="handle_expand(task)"
                                 @delete="handle_delete(task)"
@@ -33,7 +38,7 @@
 <script lang="ts" setup>
 import Panel from '@/components/counter/panel.vue';
 import TaskCard from '@/components/taskcard/taskcard.vue';
-import Column from '@/components/flex/column.vue';
+import {Column, Row} from '@/components/flex';
 import CardAdd from '@/components/taskcard/card-add.vue';
 
 import { usePomodoroStore } from '@/store';
@@ -41,15 +46,16 @@ import { computed } from 'vue';
 import { ITask } from '@/model/task';
 import Sizedbox from '@/components/sizedbox.vue';
 import { VueDraggable } from 'vue-draggable-plus';
+import Dropdown from '@/components/dropdown';
 
-const state = usePomodoroStore()
+const store = usePomodoroStore()
 
 const title = computed(() => {
-    if (state.selected_task_id == null) {
+    if (store.selected_task_id == null) {
         return ""
     }
 
-    let filtered = state.tasks.filter(task => task.id == state.selected_task_id)
+    let filtered = store.tasks.filter(task => task.id == store.selected_task_id)
     if (filtered.length == 0) {
         return ""
     }
@@ -58,40 +64,53 @@ const title = computed(() => {
 })
 
 const handle_select = (task: ITask) => {
-    state.selected_task_id = task.id
+    store.selected_task_id = task.id
 }
 
 const handle_expand = (task: ITask) => {
-    state.expanded_task_id = task.id
+    store.expanded_task_id = task.id
 }
 
 const handle_delete = async (task: ITask) => {
-    if (task.id == state.selected_task_id) {
-        state.selected_task_id = null
+    if (task.id == store.selected_task_id) {
+        store.selected_task_id = null
     }
 
     // state.remove_task(index)
-    await state.delete_task(task)
-    state.expanded_task_id = null
+    await store.delete_task(task)
+    store.expanded_task_id = null
 }
 
 const handle_save = async (value: ITask) => {
     // state.replace_task(index, value)
-    await state.update_task(value)
-    state.expanded_task_id = null
+    await store.update_task(value)
+    store.expanded_task_id = null
 }
 
 const handle_cancel = () => {
-    state.expanded_task_id = null
+    store.expanded_task_id = null
 }
 
 const handle_append = async (task: ITask) => {
     // state.add_task(task)
-    await state.insert_task(task)
+    await store.insert_task(task)
 }
 
 const handle_reorder = async () => {
-    await state.update_reorder()
+    await store.update_reorder()
+}
+
+// define methods in store
+const clear_all_tasks = async () => {
+    await store.clear_all_tasks()
+}
+
+const clean_act_pomodoro = async () => {
+    await store.clean_act_pomodoro()
+}
+
+const clear_finished_tasks = async () => {
+    await store.clear_finished_tasks()
 }
 
 </script>
@@ -114,6 +133,10 @@ const handle_reorder = async () => {
     div.tasks {
         width: 100%;
         //box-sizing: border-box;
+    }
+
+    .dropdown-wrapper {
+        position: relative;
     }
 }
 </style>

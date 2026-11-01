@@ -45,7 +45,7 @@ import SizedBox from "@/components/sizedbox.vue"
 
 import IconIsDone from '@/assets/isdone.svg'
 import IconMore from '@/assets/more.svg'
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 
 const emits = defineEmits<{
     select: [],
@@ -148,7 +148,13 @@ const note_splits = computed(() => {
                 border-radius: 4px;
                 padding: 2px;
                 background-color: white;
+
+                .icon.more {
+                    fill: black;
+                }
             }
+
+            
         }
         
     }
