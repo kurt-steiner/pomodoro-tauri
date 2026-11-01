@@ -2,7 +2,7 @@
     <div class="taskcard" :class="{'selected': selected}">
         <Row class="taskcard-info" main-axis-size="max" cross-axis-alignment="center" @click.self="toggle_select">
             <Row cross-axis-alignment="center" :class="{'done': task.is_done}">
-                <IconIsDone class="icon isdone" @click="toggle_done"/>
+                <div class="icon isdone" v-html="icon_isdone" @clikc="toggle_done"/>
                 <SizedBox width="10px"/>
                 <span class="title"> {{ task.title }}</span>
             </Row>
@@ -16,7 +16,7 @@
 
                 <div class="icon-button">
                     <button @click="toggle_expand">
-                        <IconMore class="icon more"/>
+                        <div class="icon more" v-html="icon_more"/>
                     </button>
                 </div>
             </Row>
@@ -43,8 +43,8 @@ import type {ITask} from '@/model/task';
 import {Row, Expanded} from '@/components/flex';
 import SizedBox from "@/components/sizedbox.vue"
 
-import IconIsDone from '@/assets/isdone.svg?component'
-import IconMore from '@/assets/more.svg?component'
+import icon_isdone from '@/assets/isdone.svg?raw'
+import icon_more from '@/assets/more.svg?raw'
 import { computed } from 'vue';
 
 const emits = defineEmits<{

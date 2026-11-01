@@ -1,7 +1,7 @@
 <template>
     <template v-if="!toggled">
         <Row main-axis-size="max" main-axis-alignment="center" cross-axis-alignment="center" class="card-add" @click="handle_toggle">
-            <IconAdd class="icon"/>
+            <div class="icon" v-html="icon_add"/>
             <Sizedbox width="10px"/>
             Add Task
         </Row>
@@ -18,8 +18,8 @@
 
 <script lang="ts" setup>
 import { Row } from '@/components/flex';
-import IconAdd from '@/assets/add.svg?component'
-import { ref } from 'vue';
+import icon_add from '@/assets/add.svg?raw'
+import { onMounted, ref } from 'vue';
 import { ITask } from '@/model/task';
 import CardExpand from './card-expand.vue';
 import Sizedbox from '@/components/sizedbox.vue'
@@ -60,6 +60,8 @@ const handle_append = (task: ITask) => {
     emits("append", task)
     handle_cancel()
 }
+
+onMounted(() => console.log(icon_add))
 </script>
 
 <style lang="scss" scoped>

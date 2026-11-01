@@ -17,7 +17,7 @@ import { computed } from 'vue';
 import { usePomodoroStore } from '@/store';
 import PanelHead from './head.vue';
 import { RunningStatus } from '@/model/status';
-import Column from '@/components/flex/column.vue';
+import {Column} from '@/components/flex';
 
 const state = usePomodoroStore()
 const button_text = computed(() => {

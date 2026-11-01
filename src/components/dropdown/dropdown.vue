@@ -2,7 +2,7 @@
     <div class="dropdown">
         <div class="dropdown-toggle">
             <button @click="toggle_dropdown" ref="target">
-                <IconMore class="icon"/>
+                <div class="icon" v-html="icon_more"/>
             </button>
         </div>
 
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import IconMore from '@/assets/more.svg?component'
+import icon_more from "@/assets/more.svg?raw"
 import { ref, useTemplateRef } from 'vue';
 import {onClickOutside} from '@vueuse/core'
 

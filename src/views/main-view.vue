@@ -5,7 +5,7 @@
             <Row main-axis-alignment="end" cross-axis-alignment="center" main-axis-size="max">
                 <button class="settings" @click="goto_settings">
                     <Row cross-axis-alignment="center">
-                        <IconSetting class="icon"/>
+                        <div class="icon" v-html="icon_setting"/>
                         <Sizedbox width="5px"/>
                         <span>Settings</span>
                     </Row>
@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import IconSetting from '@/assets/setting.svg?component'
+import icon_setting from '@/assets/setting.svg?raw'
 import Pomodoro from "@/components/pomodoro/pomodoro.vue";
 import { Column, Row } from "@/components/flex/index.ts";
 import { usePomodoroStore } from "@/store";
