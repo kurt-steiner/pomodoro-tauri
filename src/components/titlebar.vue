@@ -20,7 +20,7 @@ const close = () => appWindow.close()
 
 <style lang="scss" scoped>
 .titlebar {
-    height: 32px;              /* 想要多小就多小 */
+    /* height: 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,5 +28,8 @@ const close = () => appWindow.close()
     background: #2b2b2b;
     color: #fff;
     user-select: none;
+ */
+
+    display: none;
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
-    <TitleBar/>
-    
-    <router-view/>
+    <div class="app-layout">
+        <TitleBar/>
+        <router-view/>
+    </div>
 </template>
 
 <script lang="ts" setup>

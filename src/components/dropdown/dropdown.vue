@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import IconMore from '@/assets/more.svg'
+import IconMore from '@/assets/more.svg?component'
 import { ref, useTemplateRef } from 'vue';
 import {onClickOutside} from '@vueuse/core'
 

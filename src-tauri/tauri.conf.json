@@ -16,8 +16,8 @@
         "transparent": false,
         "title": "pomodoro",
         "width": 500,
-        "height": 1080,
-        "resizable": false,
+        "height": 800,
+        "resizable": true,
         "fullscreen": false 
       }
     ],

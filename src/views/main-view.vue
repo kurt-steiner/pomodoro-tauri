@@ -1,7 +1,7 @@
 <template>
     <div class="container"
-         :style="{ 'background-color': state.background_color }">
-        <Column>
+         :style="{ 'background-color': store.background_color }">
+        <Column main-axis-size="max" cross-axis-alignment="center">
             <Row main-axis-alignment="end" cross-axis-alignment="center" main-axis-size="max">
                 <button class="settings" @click="goto_settings">
                     <Row cross-axis-alignment="center">
@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import IconSetting from '@/assets/setting.svg'
+import IconSetting from '@/assets/setting.svg?component'
 import Pomodoro from "@/components/pomodoro/pomodoro.vue";
 import { Column, Row } from "@/components/flex/index.ts";
 import { usePomodoroStore } from "@/store";
@@ -31,14 +31,14 @@ import { useRouter } from "vue-router";
 import Sizedbox from "@/components/sizedbox.vue";
 
 const router = useRouter()
-const state = usePomodoroStore();
+const store = usePomodoroStore();
 
 const goto_settings = () => {
     router.push({name: 'settings'})
 }
 
 onMounted(async () => {
-  await state.load_database()
+  await store.load_database()
 })
 
 </script>

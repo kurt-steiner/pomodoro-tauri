@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import { Row } from '@/components/flex';
-import IconAdd from '@/assets/add.svg'
+import IconAdd from '@/assets/add.svg?component'
 import { ref } from 'vue';
 import { ITask } from '@/model/task';
 import CardExpand from './card-expand.vue';

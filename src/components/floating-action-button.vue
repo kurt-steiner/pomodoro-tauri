@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import IconSetting from '@/assets/setting.svg'
+import IconSetting from '@/assets/setting.svg?component'
 
 const emits = defineEmits<{
     click: []

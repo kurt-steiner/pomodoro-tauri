@@ -43,8 +43,8 @@ import type {ITask} from '@/model/task';
 import {Row, Expanded} from '@/components/flex';
 import SizedBox from "@/components/sizedbox.vue"
 
-import IconIsDone from '@/assets/isdone.svg'
-import IconMore from '@/assets/more.svg'
+import IconIsDone from '@/assets/isdone.svg?component'
+import IconMore from '@/assets/more.svg?component'
 import { computed } from 'vue';
 
 const emits = defineEmits<{
