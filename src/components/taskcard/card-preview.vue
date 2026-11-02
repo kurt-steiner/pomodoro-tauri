@@ -11,7 +11,7 @@
 
             <Row cross-axis-alignment="center">
                 <div class="fraction">
-                    {{ task.actual_pomodoro_count }} / {{ task.expect_pomodoro_count }}
+                    {{ task.actual_pomodoro_count }}/{{ task.expect_pomodoro_count }}
                 </div>
 
                 <div class="icon-button">
@@ -124,8 +124,9 @@ const note_splits = computed(() => {
         
 
         .title {
-            font-weight: bold;
-            line-height: 1.5em;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 20px;
 
             &.isdone {
                 text-decoration: line-through;
@@ -134,8 +135,9 @@ const note_splits = computed(() => {
 
 
         .fraction {
+            font-size: 16px;
             color: rgba(0, 0, 0, 0.3);
-            font-weight: 700;
+            font-weight: 500;
         }
 
         .icon-button {

@@ -1,5 +1,7 @@
 <template>
-    <div class="container"
+    <Row class="container"
+         main-axis-size="max"
+         main-axis-alignment="center"
          :style="{ 'background-color': store.background_color }">
         <Column main-axis-size="max" cross-axis-alignment="center">
             <Row main-axis-alignment="end" cross-axis-alignment="center" main-axis-size="max">
@@ -16,7 +18,7 @@
             <Pomodoro/>
             <Sizedbox height="300px"/>
         </Column>
-    </div>
+    </Row>
 
     <!-- <FloatingActionButton @click="handle_fab_click"/> -->
 </template>
