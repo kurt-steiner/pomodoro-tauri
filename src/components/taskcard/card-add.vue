@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import { Row } from '@/components/flex';
 import icon_add from '@/assets/add.svg?raw'
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { ITask } from '@/model/task';
 import CardExpand from './card-expand.vue';
 import Sizedbox from '@/components/sizedbox.vue'
@@ -60,8 +60,6 @@ const handle_append = (task: ITask) => {
     emits("append", task)
     handle_cancel()
 }
-
-onMounted(() => console.log(icon_add))
 </script>
 
 <style lang="scss" scoped>

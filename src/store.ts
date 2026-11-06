@@ -34,6 +34,7 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
         get: () => counter.value.focus_status,
         set: (status: FocusStatus) => {
             counter.value.set_focus_status(status)
+            pause_countdown()
         }
     })
 
@@ -48,9 +49,21 @@ export const usePomodoroStore = defineStore('pomodoro', () => {
         }
 
         if (interval == -1) {
-            interval = window.setInterval(() => {
-                if (counter.value.countdown_once()) {
+            interval = window.setInterval(async () => {
+                if (counter.value.countdown_once()) { // 计时结束
                     pause_countdown()
+
+                    // plus task.actual_pomodoro_count
+                    if (focus_status.value != FocusStatus.Pomodoro) { // 从 Pomodoro 计时结束
+                        let matched_tasks = tasks.value.filter(task => task.id == selected_task_id.value)
+                        if (matched_tasks.length == 0) {
+                            return;
+                        }
+
+                        matched_tasks[0].actual_pomodoro_count += 1
+                        await update_task(matched_tasks[0]);
+                    }
+                    
                     play_audio()
                 }
             }, 10)
