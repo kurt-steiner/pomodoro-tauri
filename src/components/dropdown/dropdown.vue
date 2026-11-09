@@ -61,6 +61,7 @@ const clear_finished_tasks = () => {
         border-radius: 4px;
         cursor: pointer;
         
+        padding: 4px;
         .icon {
             width: 100%;
             height: 100%;

@@ -3,45 +3,51 @@
         <div class="time">
             <h3>Time(minutes)</h3>
 
-                <Row main-axis-size="max" main-axis-alignment="space-between" cross-axis-alignment="center">
-                    <div class="edit">
-                        <label>Pomodoro</label>
-                        <input type="number" 
-                            class="edit"
-                            v-model="settings_copied.pomodoro_time" 
-                            min="15"
-                            max="99"/>
-                    </div>
-
-                    <div class="edit">
-                        <label>Short Break</label>
-                        <input type="number"
-                            class="edit"
-                            v-model="settings_copied.shortbreak_time"
-                            min="1"
-                            max="10"/>
-                    </div>
-
-                    <div class="edit">
-                        <label>Long Break</label>
-                        <input type="number"
-                            class="edit"
-                            v-model="settings_copied.longbreak_time"
-                            min="1"
-                            max="30"/>
-                    </div>
+            <Row main-axis-size="max" main-axis-alignment="space-between">
+                <Row class="edit" cross-axis-alignment="center">
+                    <label>Pomodoro</label>
+                    <Sizedbox width="10px"/>
+                    <input type="number" 
+                        class="edit"
+                        v-model="settings_copied.pomodoro_time" 
+                        min="15"
+                        max="99"/>
                 </Row>
-            </div>
-            
-            <Row main-axis-size="max" main-axis-alignment="space-between" cross-axis-alignment="center">
-                <h3>Long Break Interval</h3>
 
-                <input class="edit"
-                    type="number" 
-                    v-model="settings_copied.longbreak_interval"
-                    min="1"
-                    max="10"/>
+                <Row class="edit" cross-axis-alignment="center">
+                    <label>Short Break</label>
+                    <Sizedbox width="10px"/>
+                    <input type="number"
+                        class="edit"
+                        v-model="settings_copied.shortbreak_time"
+                        min="1"
+                        max="10"/>
+                </Row>
+
+                <Row class="edit" cross-axis-alignment="center" main-axis-alignment="end">
+                    <label>Long Break</label>
+                    <Sizedbox width="10px"/>
+                    <input type="number"
+                        class="edit"
+                        v-model="settings_copied.longbreak_time"
+                        min="1"
+                        max="30"/>
+                </Row>
             </Row>
+
+            
+        </div>
+
+        <Row main-axis-size="max" cross-axis-alignment="center">
+            <h3>Long Break Interval</h3>
+            <Expanded/>
+
+            <input class="edit"
+                type="number" 
+                v-model="settings_copied.longbreak_interval"
+                min="1"
+                max="10"/>
+        </Row>    
 
         <Expanded/>
         
@@ -58,6 +64,7 @@ import Settings from '@/model/settings';
 import { usePomodoroStore } from '@/store';
 import { useRouter } from 'vue-router';
 import {Row, Column, Expanded} from '@/components/flex';
+import Sizedbox from '@/components/sizedbox.vue';
 
 const router = useRouter()
 const state = usePomodoroStore()
@@ -84,17 +91,11 @@ const go_back = () => {
     background-color: white;
     height: 98vh;
 
-    div.time {
-        width: 100%;
-    }
+    padding: 10px;
 
-    .settings {
+    div.time {
         background-color: white;
         width: 100%;
-        padding-top: 8px;
-        padding-left: 12px;
-        padding-right: 8px;
-
 
         div.edit {
             width: 25%;
@@ -104,11 +105,6 @@ const go_back = () => {
                 color: #aaa;
                 font-weight: bold;
                 margin-bottom: 4px;
-            }
-
-            input.edit {
-                width: 100%;
-            
             }
         }
 
